@@ -27,20 +27,20 @@ export function pintaFiltros() {
     contenedorFiltros.appendChild(boton);
   });
 }
-pintaFiltros();
 
 export function pintaProductos(listaProductos) {
   contenedorProductos.innerHTML = "";
   listaProductos.forEach((producto) => {
     const tarjeta = document.createElement("div");
-    tarjeta.classList.add("producto-tarjeta");
-    tarjeta.innerHTML = `
-            <img src="../assets/images/${producto.image}" alt="${producto.name}">
-            <h3>${producto.name}</h3>
-            <p>${producto.description}</p>                                                                                                
-            <span>precio: ${producto.price} €</span>
-            <button class="btn-agregar" data-id="${producto.id}">Añadir</button>
-    `;
+    tarjeta.classList.add("product-container");
+        const imagenHTML = producto.image ? `<img src="../assets/images/${producto.image}" alt="${producto.name}">` : "";
+        tarjeta.innerHTML = `
+          ${imagenHTML}
+          <h3>${producto.name}</h3>
+          <p>${producto.description}</p>                                                                                                 
+          <span>precio: ${producto.price} €</span>
+          <button class="btn-agregar" data-id="${producto.id}">Añadir</button>
+        `;
     const botonAgregar = tarjeta.querySelector(".btn-agregar");
     botonAgregar.addEventListener("click", () => {
       agregarAlCarrito(producto.id);

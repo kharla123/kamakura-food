@@ -1,22 +1,35 @@
 //Intenta separar los eventos en este archivo.
-// //Intenta separar los eventos en este archivo.
 import { pintaFiltros, pintaProductos } from "./menu.js";
 import { inicializarBusqueda } from "./searcher.js";
 import { inicializarRecibo } from "./receipt.js";
 import { products   } from "../assets/data/data.js";
 
+function inicializarToggleCarrito() {
+    const botonCarrito = document.getElementById("cart");
+    const contenedorCarrito = document.getElementById("cart-container");
+
+    if (!botonCarrito || !contenedorCarrito) return;
+
+    botonCarrito.addEventListener("click", () => {
+        const estaOculto = getComputedStyle(contenedorCarrito).display === "none";
+        contenedorCarrito.style.display = estaOculto ? "flex" : "none";
+    });
+}
+
 export function inicializarEventos() {
     console.log("Inicializando todos los módulos de la aplicación...");
 
-    pintaProductos(products); // Mostrar todos los productos al cargar la página
+    pintaProductos(products); 
     
-    // Ejecutar componentes principales
+    
     pintaFiltros();
     inicializarRecibo();
     inicializarBusqueda();
+    inicializarToggleCarrito();
 }
 
-// Asegurar que el DOM esté listo antes de ejecutar código del DOM
+
 document.addEventListener("DOMContentLoaded", () => {
     inicializarEventos();
 });
+
